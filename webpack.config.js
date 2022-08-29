@@ -35,20 +35,20 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource'
-              },
-              {
-                test: /\.svg$/,
-                use: [
-                    {
-                        loader: 'svg-sprite-loader',
-                        options: {
-                            extract: true,
-                            spriteFilename: 'svg/spritesheet.svg'
-                        },
-                    },
-                    'svgo-loader',
-                ]
             },
+            // {
+            //     test: /\.svg$/,
+            //     use: [
+            //         {
+            //             loader: 'svg-sprite-loader',
+            //             options: {
+            //                 extract: true,
+            //                 spriteFilename: 'svg/spritesheet.svg'
+            //             },
+            //         },
+            //         'svgo-loader',
+            //     ]
+            // },
             {
                 test: /\.html$/,
                 use: 'html-loader'
