@@ -1,5 +1,6 @@
+
 function indexTemplate({ htmlAttrs, cssTags, jsTags, title }) {
-  return `<!DOCTYPE html>
+  return /*html*/`<!DOCTYPE html>
   <html${htmlAttrs}>
     <head>
       <meta charset="UTF-8">
@@ -15,8 +16,10 @@ function indexTemplate({ htmlAttrs, cssTags, jsTags, title }) {
       <!-- Hero Section -->
       <section id="hero">
           <div class="max-w-6xl mx-auto text-center mb-40 px-10 pt-16">
-          <!-- <img src="images/logo.svg" alt="" class="mx-auto my-16"> -->
-          <svg class="mx-auto my-16"><use xlink:href="svg/spritesheet.svg#logo" /></svg>
+            <svg class="mx-auto my-16"><use xlink:href="svg/spritesheet.svg#logo" /></svg>
+            <h3 className="mb-8 text-4xl font-bold text-darkGrayishBlue md:text-5xl">
+              A history of everything you copy
+            </h3>
           </div>
       </section>
       ${jsTags}

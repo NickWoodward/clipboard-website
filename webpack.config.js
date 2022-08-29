@@ -9,7 +9,7 @@ const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
 const { indexTemplate } = require('./templates')
 
 module.exports = {
-    entry: {index: "./src/index.ts"},
+    entry: {index: "./src/js/index.ts"},
     mode: "development",
     devServer: {
         static: {
