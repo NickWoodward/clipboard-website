@@ -1,6 +1,12 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {
+    MiniHtmlWebpackPlugin,
+    generateAttributes,
+    generateCSSReferences,
+    generateJSReferences
+} = require('mini-html-webpack-plugin');
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
+const { indexTemplate } = require('./templates')
 
 module.exports = {
     entry: {index: "./src/index.ts"},
@@ -64,11 +70,45 @@ module.exports = {
         // clean: true,
     },
     plugins: [
-        new HtmlWebpackPlugin({
+        new MiniHtmlWebpackPlugin({
             filename: 'index.html',
-            template: './src/index.html',
             chunks: ['index'],
-            // cache: false
+            context: {
+                title: 'Copy Site',
+                htmlAttributes: {
+                  lang: 'en'
+                },
+                cssAttributes: {
+                  rel: 'preload',
+                  as: 'style'
+                },
+                jsAttributes: {
+                  defer: true
+                }
+              },
+            template: ({
+                css,
+                js,
+                publicPath,
+                title,
+                htmlAttributes,
+                cssAttributes,
+                jsAttributes
+              }) => {
+                const htmlAttrs = generateAttributes(htmlAttributes);
+                const cssTags = generateCSSReferences({
+                  files: css,
+                  attributes: cssAttributes,
+                  publicPath
+                });
+                const jsTags = generateJSReferences({
+                  files: js,
+                  attributes: jsAttributes,
+                  publicPath
+                });
+
+                return indexTemplate({ htmlAttrs, cssTags, jsTags, title })
+              }
         }),
         new SpriteLoaderPlugin()
     ]

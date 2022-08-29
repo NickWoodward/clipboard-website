@@ -1,2 +1,7 @@
 node_modules
+<<<<<<< HEAD
 /src/images
+=======
+dist/
+
+>>>>>>> 33b40629cf357107ac28a0202adf0d47f43337e8
