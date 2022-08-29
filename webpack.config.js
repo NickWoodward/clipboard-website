@@ -1,12 +1,6 @@
 const path = require("path");
-const {
-    MiniHtmlWebpackPlugin,
-    generateAttributes,
-    generateCSSReferences,
-    generateJSReferences
-} = require('mini-html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
-const { indexTemplate } = require('./templates')
 
 module.exports = {
     entry: {index: "./src/index.ts"},
@@ -42,19 +36,19 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource'
             },
-            // {
-            //     test: /\.svg$/,
-            //     use: [
-            //         {
-            //             loader: 'svg-sprite-loader',
-            //             options: {
-            //                 extract: true,
-            //                 spriteFilename: 'svg/spritesheet.svg'
-            //             },
-            //         },
-            //         'svgo-loader',
-            //     ]
-            // },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            extract: true,
+                            spriteFilename: 'svg/spritesheet.svg'
+                        },
+                    },
+                    'svgo-loader',
+                ]
+            },
             {
                 test: /\.html$/,
                 use: 'html-loader'
@@ -70,45 +64,11 @@ module.exports = {
         // clean: true,
     },
     plugins: [
-        new MiniHtmlWebpackPlugin({
+        new HtmlWebpackPlugin({
             filename: 'index.html',
+            template: './src/index.html',
             chunks: ['index'],
-            context: {
-                title: 'Copy Site',
-                htmlAttributes: {
-                  lang: 'en'
-                },
-                cssAttributes: {
-                  rel: 'preload',
-                  as: 'style'
-                },
-                jsAttributes: {
-                  defer: true
-                }
-              },
-            template: ({
-                css,
-                js,
-                publicPath,
-                title,
-                htmlAttributes,
-                cssAttributes,
-                jsAttributes
-              }) => {
-                const htmlAttrs = generateAttributes(htmlAttributes);
-                const cssTags = generateCSSReferences({
-                  files: css,
-                  attributes: cssAttributes,
-                  publicPath
-                });
-                const jsTags = generateJSReferences({
-                  files: js,
-                  attributes: jsAttributes,
-                  publicPath
-                });
 
-                return indexTemplate({ htmlAttrs, cssTags, jsTags, title })
-              }
         }),
         new SpriteLoaderPlugin()
     ]
