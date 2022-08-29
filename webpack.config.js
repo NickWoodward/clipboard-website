@@ -24,7 +24,7 @@ module.exports = {
         hot: true,
         compress: true,
         historyApiFallback: true,
-        watchFiles: ["src/**/*"]
+        watchFiles: ["src/**/*", "./templates.js"]
     },
     module: {
         rules: [
