@@ -33,7 +33,7 @@ module.exports = {
                 use: ["style-loader", "css-loader", "postcss-loader"]
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(png|jpg|jpeg|gif)$/i,
                 type: 'asset/resource'
             },
             {
@@ -61,14 +61,13 @@ module.exports = {
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "dist"),
-        // clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './src/index.html',
             chunks: ['index'],
-
+            // publicPath: true
         }),
         new SpriteLoaderPlugin()
     ]
