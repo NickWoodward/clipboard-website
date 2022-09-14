@@ -19,7 +19,11 @@ module.exports = {
     },
     fontFamily: {
       sans: ['Bai Jamjuree', 'sans-serif'],
-    }
+    },
+    backgroundImage: {
+      'hero-pattern-desktop': "url('/src/images/bg-header-desktop.png')",
+      'hero-pattern-mobile': "url('/src/images/bg-header-mobile.png')"
+    },
   },
   plugins: [],
 }
